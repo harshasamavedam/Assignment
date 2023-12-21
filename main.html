@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/ac42c3b1f7.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="header" class="style">
+<script>
+    let presentstyle='line'
+    let presentinternalstyle='imageContaerL'
+    let present=undefined
+    const l=document.getElementById('header')
+const k=document.createElement('div')
+k.classList.add('star')
+l.appendChild(k)
+let hed=document.createElement('h1');
+hed.textContent='LPL'
+k.appendChild(hed)
+let internalcont=document.createElement('div')
+internalcont.classList.add('containerstyle')
+k.appendChild(internalcont)
+let userinp=document.createElement('input')
+userinp.type='text'
+internalcont.append(userinp)
+userinp.onkeyup=()=>{
+    present=userinp.value
+    change()
+}clearInterval
+const listy=document.createElement('i')
+listy.classList.add("fa-solid","fa-list")
+internalcont.appendChild(listy)
+listy.onclick=()=>{
+    presentstyle='line'
+    presentinternalstyle='imageContaerL'
+    change()
+}
+
+console.log(presentstyle)
+const columnview=document.createElement('i')
+columnview.classList.add("fa-solid","fa-grip", 'icon')
+internalcont.append(columnview)
+columnview.onclick=()=>{
+    presentstyle='column1'
+    presentinternalstyle='imageContaerC'
+    change()
+}
+
+const productscon=document.createElement('div')
+
+   l.appendChild(productscon)
+
+   const change=()=>{
+    console.log('changecalled')
+    productscon.removeChild(prevlist)
+    productslist()
+}
+    
+productslist=async()=>{
+    let prevlist=document.createElement('div')
+    prevlist.id='prevlist'
+    prevlist.classList.add(presentstyle)
+    productscon.appendChild(prevlist)
+    
+    const l=await fetch('https://mocki.io/v1/0934df88-6bf7-41fd-9e59-4fb7b8758093');
+   const m=await l.json()
+   const da=m.data
+
+
+   da.map((each)=>{
+    let imgcon=document.createElement('div')
+    imgcon.classList.add(presentinternalstyle)
+    prevlist.appendChild(imgcon);
+    let imgcon1=document.createElement('div')
+    imgcon1.classList.add('images')
+    let type=document.createElement('p')
+    type.classList.add('para')
+    type.textContent=each.product_badge;
+    imgcon1.appendChild(type)
+    let ima=document.createElement('img')
+    ima.alt=each.product_title
+    ima.src=each.product_image
+    imgcon1.appendChild(ima)
+    let title=document.createElement('h1');
+    title.textContent=each.product_title;
+    imgcon1.appendChild(title)
+   
+    each.product_variants.map((each)=>{
+        let cat=document.createElement('p')
+if(each.v1=== undefined){
+    if(each.v2===undefined){
+        if(each.v3===undefined){
+         
+        }
+        else{
+       if( each.v3.includes(present) && present.length>0){
+cat.classList.add('para')
+       }
+       cat.textContent=each.v3
+imgcon1.appendChild(cat)
+}
+    }
+    else{
+       if( each.v2.includes(present) && present.length>0){
+cat.classList.add('para')
+       }
+       cat.textContent=each.v2
+imgcon1.appendChild(cat)
+}
+}
+else{
+       if( each.v1.includes(present) && present.length>0){
+cat.classList.add('para')
+
+       }
+       cat.textContent=each.v1
+imgcon1.appendChild(cat)
+}
+    })
+        imgcon.appendChild(imgcon1)
+    
+   })
+
+}
+let products=productslist()
+</script>
+        </div>
+    </body>
+</html>
